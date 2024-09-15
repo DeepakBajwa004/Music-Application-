@@ -15,7 +15,6 @@ class SongDataController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     requestStoragePermissions();
   }
