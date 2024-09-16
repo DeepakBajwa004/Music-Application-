@@ -8,6 +8,7 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 
 class SongAndVolume extends StatelessWidget {
+
   const SongAndVolume({super.key, });
 
   @override
@@ -54,7 +55,21 @@ class SongAndVolume extends StatelessWidget {
             annotations: [
               GaugeAnnotation(
                 horizontalAlignment: GaugeAlignment.center,
-                  widget: Container(
+                  widget: songPlayerController.isCloudPlaying.value ?
+                  Container(
+                    height: 280,
+                    width: 280,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1000),
+                      color: divColor,
+                      image: DecorationImage(
+                        image: NetworkImage(songPlayerController.albumUrl.value),
+                        fit: BoxFit.cover,
+                      )
+                    ),
+                  ) :
+                Container(
                     height: 280,
                     width: 280,
                     clipBehavior: Clip.antiAlias,
@@ -62,17 +77,18 @@ class SongAndVolume extends StatelessWidget {
                       borderRadius: BorderRadius.circular(1000),
                       color: divColor,
                     ),
-                    child: songPlayerController.albumArtwork.value != null
-                        ? Image.memory(
-                      songPlayerController.albumArtwork.value!,
-                      fit: BoxFit.cover,
-                    )
-                        : const Icon(
-                      Icons.music_note,
-                      size: 100,
-                      color: Colors.grey,
-                    ),
+                  child: songPlayerController.albumArtwork.value != null
+                      ? Image.memory(
+                    songPlayerController.albumArtwork.value!,
+                    fit: BoxFit.cover,
+                  )
+                      : const Icon(
+                    Icons.music_note,
+                    size: 100,
+                    color: Colors.grey,
                   ),
+                  ),
+
               )
             ],
           )

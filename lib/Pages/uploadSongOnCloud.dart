@@ -12,7 +12,7 @@ class UploadSongOnCloud extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: (){
-            cloudSongController.uploadSongToDataBase();
+            cloudSongController.getCloudSong();
           },
           child: const Text('Upload Song'),
         ),

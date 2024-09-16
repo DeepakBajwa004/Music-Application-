@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:m_music/controller/cloudSongController.dart';
 import 'package:m_music/controller/songDataController.dart';
 import 'package:m_music/controller/songPlayerController.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 import '../../config/Color.dart';
 import '../../config/image_string.dart';
@@ -18,6 +20,7 @@ class SongPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SongDataController songDataController = Get.put(SongDataController());
     SongPlayerController songPlayerController = Get.put(SongPlayerController());
+    CloudSongController cloudSongController = Get.put(CloudSongController());
     return  Scaffold(
       body: SafeArea(
         child: Padding(
@@ -28,7 +31,7 @@ class SongPage extends StatelessWidget {
                 const SizedBox(height: 10,),
                 const SongHeader(),
                 const SizedBox(height: 20,),
-                const TrendingSongSlider(),
+                TrendingSongSlider(),
                 const SizedBox(height: 20,),
                 Obx( ()=>
                   Row(
@@ -64,14 +67,27 @@ class SongPage extends StatelessWidget {
                       songPlayerController.playLocalAudio(e);
                       songDataController.findCurrentSongPlayingIndex(e.id);
                       Get.to(()=> SongPlayPage(
+
                       ));
                     }
                   )).toList()
                 ) :
-                const Column(
-                  children: [
+                 Column(
+                  children:
+                    cloudSongController.cloudSongList.value.map((e)=>
+                        SongTile(
+                            songName: e.title!,
+                            onPress: (){
+                              print(e.album!);
+                              songPlayerController.playCloudAudio(e);
+                              songDataController.findCurrentSongPlayingIndex(e.id!);
+                              Get.to(()=> SongPlayPage(
 
-                  ],
+                              ));
+                            }
+                        ),
+                    ).toList(),
+
                 )),
 
               ],

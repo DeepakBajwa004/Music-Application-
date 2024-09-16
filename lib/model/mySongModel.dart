@@ -10,24 +10,34 @@ class MySongModel {
       {this.id, this.title, this.artist, this.album, this.albumArt, this.data});
 
   MySongModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    artist = json['artist'];
-    album = json['album'];
-    albumArt = json['albumArt'];
-    data = json['data'];
+    if (json['id'] is int) {
+      id = json['id'];
+    }
+    if (json['title'] is String) {
+      title = json['title'];
+    }
+    if (json['artist'] is String) {
+      artist = json['artist'];
+    }
+    if (json['album'] is String) {
+      album = json['album'];
+    }
+    if (json['albumArt'] is String) {
+      albumArt = json['albumArt'];
+    }
+    if (json['data'] is String) {
+      data = json['data'];
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['artist'] = this.artist;
-    data['album'] = this.album;
-    data['albumArt'] = this.albumArt;
-    data['data'] = this.data;
-    return data;
+    final Map<String, dynamic> jsonMap = <String, dynamic>{};
+    jsonMap['id'] = id;
+    jsonMap['title'] = title;
+    jsonMap['artist'] = artist;
+    jsonMap['album'] = album;
+    jsonMap['albumArt'] = albumArt;
+    jsonMap['data'] = data;
+    return jsonMap;
   }
 }
-
-

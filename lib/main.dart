@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: darkTheme,
-      //home: const SongPage(),
-      home: UploadSongOnCloud(),
+      home: const SplashScreen(),
+      //home: UploadSongOnCloud(),
     );
   }
 }

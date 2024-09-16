@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:m_music/controller/songDataController.dart';
+import 'package:m_music/model/mySongModel.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class SongPlayerController extends GetxController {
@@ -21,27 +22,51 @@ class SongPlayerController extends GetxController {
   RxBool isLoop = false.obs;
   RxBool isShuffle = false.obs;
   RxDouble volumeLable = 0.2.obs;
-  Rxn<Uint8List> albumArtwork = Rxn<Uint8List>(); // Store album artwork
+  RxBool isCloudPlaying =  false.obs;
+  RxString albumUrl = "".obs;
+  Rxn<Uint8List> albumArtwork = Rxn<Uint8List>();// Store album artwork
+
 
 
   // Play song from local storage
   void playLocalAudio( SongModel song ) async {
     songTitle.value  = song.title;
     songArtist.value = song.artist!;
+    isCloudPlaying.value =false  ;
 
     // Set audio source
     await player.setAudioSource(
       AudioSource.uri(Uri.parse(song.data)),
     );
 
-    // Query for the album artwork
+
+   //  Query for the album artwork
     albumArtwork.value = await audioQuery.queryArtwork(
       song.id,
       ArtworkType.AUDIO,
     );
 
+    player.play();
+    updatePosition();
+    isPlaying.value = true;
+  }
+   void playCloudAudio( MySongModel song ) async {
+    songTitle.value  = song.title!;
+    songArtist.value = song.artist!;
 
+    albumUrl.value =song.albumArt!;
+    isCloudPlaying.value =true;
 
+    // Set audio source
+    await player.setAudioSource(
+      AudioSource.uri(Uri.parse(song.data!)),
+    );
+
+    //Query for the album artwork
+    albumArtwork.value = await audioQuery.queryArtwork(
+      song.id!,
+      ArtworkType.AUDIO,
+    );
 
     player.play();
     updatePosition();

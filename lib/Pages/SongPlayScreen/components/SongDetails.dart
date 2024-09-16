@@ -16,13 +16,13 @@ class SongDetails extends StatelessWidget {
     SongPlayerController songPlayerController = Get.put(SongPlayerController());
     return Column(
       children: [
-        Row(
-          children: [
-            SvgPicture.asset(playOutlineIcon,color: labelColor,width: 30,),
-            const SizedBox(width:5,),
-            Text('123 Plays',style: Theme.of(context).textTheme.bodySmall,)
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     SvgPicture.asset(playOutlineIcon,color: labelColor,width: 30,),
+        //     const SizedBox(width:5,),
+        //     Text('123 Plays',style: Theme.of(context).textTheme.bodySmall,)
+        //   ],
+        // ),
         const SizedBox(height: 10,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

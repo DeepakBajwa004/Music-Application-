@@ -17,7 +17,7 @@ class SongHeader extends StatelessWidget {
             fontSize: 30,
             fontWeight: FontWeight.bold,
             fontFamily: "Poppins",
-            fontStyle: FontStyle.italic
+            //fontStyle: FontStyle.italic
           ),
         ),
       ],

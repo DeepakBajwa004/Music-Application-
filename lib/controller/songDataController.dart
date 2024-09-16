@@ -27,7 +27,7 @@ class SongDataController extends GetxController {
         uriType: UriType.EXTERNAL
     );
     if (kDebugMode) {
-      print(localSongList.length);
+      print(" Local Song Length${localSongList.length}");
     }
   }
 
